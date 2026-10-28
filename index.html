@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colegio Montano - Interactive Study Guide: Telling Time & Adverbs of Frequency</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        montanoBlue: '#1269A8',
+                        montanoYellow: '#F7D615',
+                        montanoTeal: '#54887D',
+                        montanoLightBlue: '#88B5C7',
+                        montanoOlive: '#A6B046',
+                        montanoBg: '#F2F5E9'
+                    },
+                    fontFamily: {
+                        sans: ['Segoe UI', 'Tahoma', 'Geneva', 'Verdana', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom styles for digital chalkboard look and smooth transitions */
+        body {
+            background-color: #e2e8f0;
+        }
+        .chalkboard-frame {
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(18, 105, 168, 0.2);
+            border: 4px solid #1269A8;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .solution-box {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-in-out;
+        }
+        .solution-box.show {
+            max-height: 300px;
+        }
+    </style>
+</head>
+<body class="bg-slate-100 min-h-screen p-3 md:p-6 font-sans">
+
+    <!-- Main Digital Chalkboard Frame -->
+    <div id="chalkboard" class="max-w-6xl mx-auto chalkboard-frame bg-[#F2F5E9] overflow-hidden flex flex-col">
+        
+        <!-- Header with Logo and Fullscreen Button -->
+        <header class="bg-montanoBlue text-white p-4 md:px-6 flex flex-wrap justify-between items-center border-b-4 border-montanoYellow">
+            <div class="flex items-center space-x-3">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyEop0yf6lZ7Jk9MILZxF1rBj4Oqs5esyhIQ&s" alt="Colegio Montano Logo" class="h-12 w-12 rounded-full object-cover bg-white p-1 border-2 border-montanoYellow shadow-md" onerror="this.src='https://placehold.co/48x48/1269A8/FFFFFF?text=CM'">
+                <div>
+                    <h1 class="text-lg md:text-xl font-bold text-montanoYellow tracking-wide">COLEGIO MONTANO</h1>
+                    <p class="text-xs md:text-sm text-montanoLightBlue font-medium">Second Grade | English Interactive Study Guide (Our World 2)</p>
+                </div>
+            </div>
+            <div class="mt-2 md:mt-0 flex items-center space-x-2">
+                <span class="text-xs bg-montanoTeal px-3 py-1 rounded-full text-white font-semibold shadow-sm">Unit: Telling Time & Routines</span>
+                <button onclick="toggleFullScreen()" class="bg-montanoYellow text-montanoBlue font-bold text-xs md:text-sm px-3.5 py-2 rounded-lg shadow hover:bg-yellow-300 transition flex items-center space-x-1">
+                    <span>[ ⛶ Fullscreen ]</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Horizontal Navigation Tabs -->
+        <nav class="bg-montanoTeal px-2 md:px-6 py-2 flex flex-wrap gap-2 text-white font-bold text-xs md:text-sm overflow-x-auto">
+            <button onclick="switchTab('theory')" id="btn-theory" class="tab-btn px-4 py-2 rounded-lg bg-montanoBlue text-montanoYellow shadow transition border border-montanoYellow">1. Theory & Rules</button>
+            <button onclick="switchTab('examples')" id="btn-examples" class="tab-btn px-4 py-2 rounded-lg bg-montanoTeal hover:bg-teal-700 transition">2. Solved Examples (15)</button>
+            <button onclick="switchTab('exercises')" id="btn-exercises" class="tab-btn px-4 py-2 rounded-lg bg-montanoTeal hover:bg-teal-700 transition">3. Practice Exercises (15)</button>
+            <button onclick="switchTab('reflection')" id="btn-reflection" class="tab-btn px-4 py-2 rounded-lg bg-montanoTeal hover:bg-teal-700 transition">4. Critical Reflection</button>
+            <button onclick="switchTab('evaluation')" id="btn-evaluation" class="tab-btn px-4 py-2 rounded-lg bg-montanoTeal hover:bg-teal-700 transition">5. Formative Quiz</button>
+        </nav>
+
+        <!-- Main Workspace Content Container -->
+        <main class="p-4 md:p-8 flex-grow overflow-y-auto max-h-[75vh]">
+            
+            <!-- TAB 1: THEORY -->
+            <section id="theory" class="tab-content active space-y-6">
+                <div class="bg-white p-6 rounded-xl border-2 border-montanoTeal shadow-sm">
+                    <h2 class="text-2xl font-bold text-montanoBlue mb-3 flex items-center">
+                        <span class="bg-montanoYellow text-montanoBlue w-8 h-8 rounded-full inline-flex items-center justify-center mr-2 text-sm">A</span> 
+                        Grammar I: Telling Time
+                    </h2>
+                    <p class="text-slate-700 mb-4 leading-relaxed">
+                        When we want to ask about the time or schedules, we use the question words <strong>"What time"</strong> or <strong>"When"</strong> along with auxiliary verbs <em>do</em> or <em>does</em>.
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-montanoLightBlue/20 p-4 rounded-lg border border-montanoLightBlue">
+                            <h3 class="font-bold text-montanoBlue mb-2">Asking Questions:</h3>
+                            <ul class="list-disc pl-5 space-y-1 text-slate-700 text-sm">
+                                <li><strong>What time is it?</strong> -> <em>It's 11:00 (eleven o'clock).</em></li>
+                                <li><strong>When do you get up?</strong> -> <em>At 7:00 (seven o'clock).</em></li>
+                                <li><strong>When does she get up?</strong> -> <em>At 8:00 (eight o'clock).</em></li>
+                            </ul>
+                        </div>
+                        <div class="bg-montanoOlive/20 p-4 rounded-lg border border-montanoOlive">
+                            <h3 class="font-bold text-montanoTeal mb-2">Key Rules & Shortcuts:</h3>
+                            <ul class="list-disc pl-5 space-y-1 text-slate-700 text-sm">
+                                <li>Use <strong>"It's"</strong> when answering "What time is it?".</li>
+                                <li>Use <strong>"At"</strong> when answering "When do/does...". (e.g., <em>At seven o'clock</em>).</li>
+                                <li>Remember: <em>it's = it is</em>.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl border-2 border-montanoTeal shadow-sm">
+                    <h2 class="text-2xl font-bold text-montanoBlue mb-3 flex items-center">
+                        <span class="bg-montanoYellow text-montanoBlue w-8 h-8 rounded-full inline-flex items-center justify-center mr-2 text-sm">B</span> 
+                        Grammar II: Adverbs of Frequency
+                    </h2>
+                    <p class="text-slate-700 mb-4 leading-relaxed">
+                        Adverbs of frequency tell us <em>how often</em> something happens. In second grade, we focus on <strong>always</strong> (100%) and <strong>never</strong> (0%).
+                    </p>
+                    <div class="bg-montanoLightBlue/20 p-4 rounded-lg border border-montanoLightBlue">
+                        <h3 class="font-bold text-montanoBlue mb-2">Structure & Examples:</h3>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left text-sm text-slate-700 border-collapse">
+                                <thead>
+                                    <tr class="bg-montanoBlue text-white">
+                                        <th class="p-2 border">Subject</th>
+                                        <th class="p-2 border">Adverb</th>
+                                        <th class="p-2 border">Action / Rest</th>
+                                        <th class="p-2 border">Time Expression</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="bg-white">
+                                        <td class="p-2 border font-medium">I</td>
+                                        <td class="p-2 border text-green-700 font-bold">always</td>
+                                        <td class="p-2 border">brush my teeth</td>
+                                        <td class="p-2 border">every day.</td>
+                                    </tr>
+                                    <tr class="bg-slate-50">
+                                        <td class="p-2 border font-medium">She</td>
+                                        <td class="p-2 border text-red-600 font-bold">never</td>
+                                        <td class="p-2 border">watches TV</td>
+                                        <td class="p-2 border">in the evening.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 2: SOLVED EXAMPLES (15 Total: 5 Basic, 5 Intermediate, 5 Advanced) -->
+            <section id="examples" class="tab-content space-y-6">
+                <div class="bg-white p-6 rounded-xl border-2 border-montanoTeal shadow-sm">
+                    <h2 class="text-2xl font-bold text-montanoBlue mb-2">Solved Examples (Step-by-Step)</h2>
+                    <p class="text-slate-600 text-sm mb-6">Review these 15 solved examples across Basic, Intermediate, and Advanced levels based on Our World 2 units.</p>
+                    
+                    <div class="space-y-4">
+                        <!-- BASIC LEVEL EXAMPLES (1-5) -->
+                        <div class="bg-montanoOlive/10 p-4 rounded-lg border border-montanoOlive">
+                            <span class="bg-montanoOlive text-white text-xs px-2 py-1 rounded font-bold uppercase">Basic Level</span>
+                            <div class="mt-3 space-y-3">
+                                <div class="bg-white p-3 rounded shadow-sm border">
+                                    <p class="font-bold text-montanoBlue">Example 1: Telling Time (O'clock)</p>
+                                    <p class="text-slate-700 text-sm">Question: What time is it when the clock shows 1:00?</p>
+                                    <p class="text-green-700 text-sm font-semibold mt-1">Solution: It's one o'clock.</p>
+                                </div>
+                                <div class="bg-white p-3 rounded shadow-sm border">
+                                    <p class="font-bold text-montanoBlue">Example 2: Telling Time (Question)</p>
+                                    <p class="text-slate-700 text-sm">Question: Complete the question: "______ is it?" (Answer: It's 7:00)</p>
+                                    <p class="text-green-700 text-sm font-semibold mt-1">Solution: What time is it?</p>
+                                </div>
+                                <div class="bg-white p-3 rounded shadow-sm border">
+                                    <p class="font-bold text-montanoBlue">Example 3: Time Preposition</p>
+                                    <p class="text-slate-700 text-sm">Question: Fill in the blank: "I get up ______ seven o'clock."</p>
+                                    <p class="text-green-700 text-sm font-semibold mt-1">Solution: at (I get up at seven o'clock.)</p>
+                                </div>
+                                <div class="bg-white p-3 rounded shadow-sm border">
+                                    <p class="font-bold text-montanoBlue">Example 4: Adverb "Always"</p>
+                                    <p class="text-slate-700 text-sm">Question: Order the sentence: [I / always / go to school / in the morning]</p>
+                                    <p class="text-green-700 text-sm font-semibold mt-1">Solution: I always go to school in the morning.</p>
+                                </div>
+                                <div class="bg-white p-3 rounded shadow-sm border">
+                                    <p class="font-bold text-montanoBlue">Example 5: Adverb "Never"</p>
+                                    <p class="text-slate-700 text-sm">Question: Order the sentence: [I / never / eat breakfast / in the evening]</p>
+                                    <p class="text-green-700 text-sm font-semibold mt-1">Solution: I never eat breakfast in the evening.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- INTERMEDIATE LEVEL EXAMPLES (6-10) -->
+                        <div class="bg-montanoLightBlue/20 p-4 rounded-lg border border-montanoLightBlue">
+                            <span class="bg-montanoLightBlue text-montanoBlue text-xs px-2 py-1 rounded font-bold uppercase">Intermediate Level</span>
+                            <div class="mt-3 space-y-3">
+                                <div class="bg-white p-3 rounded shadow-sm border">
+                                    <p class="font-bold text-montanoBlue">Example 6: Question with "Does"</p>
+                                    <p class="text-slate-700 text-sm">Question: Complete: "When ______ he play with his friends?"</p>
+                                    <p class="text-green-700 text-sm font-semibold mt-1">Solution: does (Singular third person 'he' requires auxiliary 'does').</p>
+                                </div>
+                                <div class="bg-white p-3 rounded shadow-sm border">
+                                    <p class="font-bold text-montanoBlue">Example 7: Third Person Routine Answer</p>
+                                    <p class="text-slate-700 text-sm">Question: Answer the question: "When does she go to bed?" (Time: 8:00)</p>
+                                    <p class="text-green-700 text-sm font-semibold mt-1">Solution: At 8:00 (eight o'clock).</p>
+                                </div>
+                                <div class="bg-white p-3 rounded shadow-sm border">
+                                    <p class="font-bold text-montanoBlue">Example 8: Adverb placement with third person</p>
+                                    <p class="text-slate-700 text-sm">Question: Complete: "She studies. She ______ watches TV." (Meaning 0%)</p>
+                                    <p class="text-green-700 text-sm font-semibold mt-1">Solution: never (She never watches TV).</p>
+                                </div>
+                                <div class="bg-white p-3 rounded shadow-sm border">
+                                    <p class="font-bold text-montanoBlue">Example 9: Combining time and frequency</p>
+                                    <p class="text-slate-700 text-sm">Question: Write a sentence using: [I / always / eat lunch / at 12:00]</p>
+                                    <p class="text-green-700 text-sm font-semibold mt-1">Solution: I always eat lunch at 12:00.</p>
+                                </div>
+                                <div class="bg-white p-3 rounded shadow-sm border">
+                                    <p class="font-bold text-montanoBlue">Example 10: Choosing 'at' or 'it's'</p>
+                                    <p class="text-slate-700 text-sm">Question: Choose the correct word: "______ five o'clock. I'm eating lunch."</p>
+                                    <p class="text-green-700 text-sm font-semibold mt-1">Solution: It's (Used at the start of a sentence telling the time).</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ADVANCED LEVEL EXAMPLES (11-15) -->
+                        <div class="bg-montanoBlue/10 p-4 rounded-lg border border-montanoBlue">
+                            <span class="bg-montanoBlue text-white text-xs px-2 py-1 rounded font-bold uppercase">Advanced Level</span>
+                            <div class="mt-3 space-y-3">
+                                <div class="bg-white p-3 rounded shadow-sm border">
+                                    <p class="font-bold text-montanoBlue">Example 11: Complex Routine Question</p>
+                                    <p class="text-slate-700 text-sm">Question: Formulate the question for: "She studies in the evening." using 'What'.</p>
+                                    <p class="text-green-700 text-sm font-semibold mt-1">Solution: What does she do in the evening?</p>
+                                </div>
+                                <div class="bg-white p-3 rounded shadow-sm border">
+                                    <p class="font-bold text-montanoBlue">Example 12: Multiple Adverbs Comparison</p>
+                                    <p class="text-slate-700 text-sm">Question: Contrast two habits: "I ______ play video games in the afternoon, but I ______ go to school at night."</p>
+                                    <p class="text-green-700 text-sm font-semibold mt-1">Solution: always (or never), never (Logical consistency with real-world routines).</p>
+                                </div>
+                                <div class="bg-white p-3 rounded shadow-sm border">
+                                    <p class="font-bold text-montanoBlue">Example 13: Time & Partner Dialogue</p>
+                                    <p class="text-slate-700 text-sm">Question: Convert partner Q&A: "When do you get up?" -> "At 6:00." into a third-person statement for your sister.</p>
+                                    <p class="text-green-700 text-sm font-semibold mt-1">Solution: My sister gets up at 6:00.</p>
+                                </div>
+                                <div class="bg-white p-3 rounded shadow-sm border">
+                                    <p class="font-bold text-montanoBlue">Example 14: Double Rule Integration (Time + Adverb)</p>
+                                    <p class="text-slate-700 text-sm">Question: Translate routine into a full sentence: [Subject: I, Frequency: always, Action: eat breakfast, Time: at 7:00]</p>
+                                    <p class="text-green-700 text-sm font-semibold mt-1">Solution: I always eat breakfast at 7:00.</p>
+                                </div>
+                                <div class="bg-white p-3 rounded shadow-sm border">
+                                    <p class="font-bold text-montanoBlue">Example 15: Error Correction</p>
+                                    <p class="text-slate-700 text-sm">Question: Find and fix the error: "When do your sister go to bed?"</p>
+                                    <p class="text-green-700 text-sm font-semibold mt-1">Solution: Change "do" to "does" -> "When does your sister go to bed?"</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 3: PRACTICE EXERCISES (15 Total with Hidden Solutions) -->
+            <section id="exercises" class="tab-content space-y-6">
+                <div class="bg-white p-6 rounded-xl border-2 border-montanoTeal shadow-sm">
+                    <h2 class="text-2xl font-bold text-montanoBlue mb-2">Practice Exercises</h2>
+                    <p class="text-slate-600 text-sm mb-6">Solve the following 15 exercises. Click <strong>"Show Solution"</strong> to check your answers step-by-step!</p>
+
+                    <div class="space-y-4">
+                        
+                        <!-- BASIC EXERCISES (1-5) -->
+                        <div class="bg-montanoOlive/10 p-4 rounded-lg border border-montanoOlive">
+                            <span class="bg-montanoOlive text-white text-xs px-2 py-1 rounded font-bold uppercase">Basic Level Practice</span>
+                            
+                            <div class="mt-4 space-y-4">
+                                <!-- Exercise 1 -->
+                                <div class="bg-white p-4 rounded-lg border shadow-sm">
+                                    <p class="font-bold text-slate-800 text-sm">1. Fill in the blank for the time: "It's nine ______." (9:00)</p>
+                                    <button onclick="toggleSolution('sol-1')" class="mt-2 bg-montanoTeal text-white text-xs px-3 py-1.5 rounded hover:bg-teal-700 transition font-medium">Show Solution</button>
+                                    <div id="sol-1" class="solution-box bg-slate-50 p-3 mt-2 rounded border text-sm text-slate-700">
+                                        <p class="font-semibold text-montanoBlue">Step-by-step solution:</p>
+                                        <p>When writing digital or clock times in words for full hours, we use "o'clock". Therefore, the answer is <strong>o'clock</strong>.</p>
+                                    </div>
+                                </div>
+
+                                <!-- Exercise 2 -->
+                                <div class="bg-white p-4 rounded-lg border shadow-sm">
+                                    <p class="font-bold text-slate-800 text-sm">2. Complete the time question: "______ is it?" -> "It's 5:00."</p>
+                                    <button onclick="toggleSolution('sol-2')" class="mt-2 bg-montanoTeal text-white text-xs px-3 py-1.5 rounded hover:bg-teal-700 transition font-medium">Show Solution</button>
+                                    <div id="sol-2" class="solution-box bg-slate-50 p-3 mt-2 rounded border text-sm text-slate-700">
+                                        <p class="font-semibold text-montanoBlue">Step-by-step solution:</p>
+                                        <p>To ask for the current time, the correct phrase is <strong>What time</strong>. -> <em>What time is it?</em></p>
+                                    </div>
+                                </div>
+
+                                <!-- Exercise 3 -->
+                                <div class="bg-white p-4 rounded-lg border shadow-sm">
+                                    <p class="font-bold text-slate-800 text-sm">3. Choose 'at' or 'it's': "I get up ______ seven o'clock."</p>
+                                    <button onclick="toggleSolution('sol-3')" class="mt-2 bg-montanoTeal text-white text-xs px-3 py-1.5 rounded hover:bg-teal-700 transition font-medium">Show Solution</button>
+                                    <div id="sol-3" class="solution-box bg-slate-50 p-3 mt-2 rounded border text-sm text-slate-700">
+                                        <p class="font-semibold text-montanoBlue">Step-by-step solution:</p>
+                                        <p>When specifying the exact time an action occurs, we use the preposition <strong>at</strong>. -> <em>at seven o'clock</em>.</p>
+                                    </div>
+                                </div>
+
+                                <!-- Exercise 4 -->
+                                <div class="bg-white p-4 rounded-lg border shadow-sm">
+                                    <p class="font-bold text-slate-800 text-sm">4. Choose between 'always' and 'never': "I ______ go to bed in the morning." (0% chance)</p>
+                                    <button onclick="toggleSolution('sol-4')" class="mt-2 bg-montanoTeal text-white text-xs px-3 py-1.5 rounded hover:bg-teal-700 transition font-medium">Show Solution</button>
+                                    <div id="sol-4" class="solution-box bg-slate-50 p-3 mt-2 rounded border text-sm text-slate-700">
+                                        <p class="font-semibold text-montanoBlue">Step-by-step solution:</p>
+                                        <p>Since people sleep at night and not in the morning, the correct adverb for 0% frequency is <strong>never</strong>.</p>
+                                    </div>
+                                </div>
+
+                                <!-- Exercise 5 -->
+                                <div class="bg-white p-4 rounded-lg border shadow-sm">
+                                    <p class="font-bold text-slate-800 text-sm">5. Fill in the missing word: "I ______ go to school in the morning." (100% chance)</p>
+                                    <button onclick="toggleSolution('sol-5')" class="mt-2 bg-montanoTeal text-white text-xs px-3 py-1.5 rounded hover:bg-teal-700 transition font-medium">Show Solution</button>
+                                    <div id="sol-5" class="solution-box bg-slate-50 p-3 mt-2 rounded border text-sm text-slate-700">
+                                        <p class="font-semibold text-montanoBlue">Step-by-step solution:</p>
+                                        <p>For daily school attendance (100% frequency), we use <strong>always</strong>.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- INTERMEDIATE EXERCISES (6-10) -->
+                        <div class="bg-montanoLightBlue/20 p-4 rounded-lg border border-montanoLightBlue">
+                            <span class="bg-montanoLightBlue text-montanoBlue text-xs px-2 py-1 rounded font-bold uppercase">Intermediate Level Practice</span>
+                            
+                            <div class="mt-4 space-y-4">
+                                <!-- Exercise 6 -->
+                                <div class="bg-white p-4 rounded-lg border shadow-sm">
+                                    <p class="font-bold text-slate-800 text-sm">6. Complete the question: "______ do you eat lunch?" -> "At 12:00."</p>
+                                    <button onclick="toggleSolution('sol-6')" class="mt-2 bg-montanoTeal text-white text-xs px-3 py-1.5 rounded hover:bg-teal-700 transition font-medium">Show Solution</button>
+                                    <div id="sol-6" class="solution-box bg-slate-50 p-3 mt-2 rounded border text-sm text-slate-700">
+                                        <p class="font-semibold text-montanoBlue">Step-by-step solution:</p>
+                                        <p>When asking about schedule time with "you", use the question word <strong>When</strong>. -> <em>When do you eat lunch?</em></p>
+                                    </div>
+                                </div>
+
+                                <!-- Exercise 7 -->
+                                <div class="bg-white p-4 rounded-lg border shadow-sm">
+                                    <p class="font-bold text-slate-800 text-sm">7. Fill in the correct auxiliary: "When ______ he play with his friends?"</p>
+                                    <button onclick="toggleSolution('sol-7')" class="mt-2 bg-montanoTeal text-white text-xs px-3 py-1.5 rounded hover:bg-teal-700 transition font-medium">Show Solution</button>
+                                    <div id="sol-7" class="solution-box bg-slate-50 p-3 mt-2 rounded border text-sm text-slate-700">
+                                        <p class="font-semibold text-montanoBlue">Step-by-step solution:</p>
+                                        <p>The subject is third-person singular ("he"), so we use the auxiliary <strong>does</strong>.</p>
+                                    </div>
+                                </div>
+
+                                <!-- Exercise 8 -->
+                                <div class="bg-white p-4 rounded-lg border shadow-sm">
+                                    <p class="font-bold text-slate-800 text-sm">8. Complete with the right adverb: "She studies. She ______ watches TV." (0% frequency)</p>
+                                    <button onclick="toggleSolution('sol-8')" class="mt-2 bg-montanoTeal text-white text-xs px-3 py-1.5 rounded hover:bg-teal-700 transition font-medium">Show Solution</button>
+                                    <div id="sol-8" class="solution-box bg-slate-50 p-3 mt-2 rounded border text-sm text-slate-700">
+                                        <p class="font-semibold text-montanoBlue">Step-by-step solution:</p>
+                                        <p>To indicate zero frequency or negation of habit, use <strong>never</strong>.</p>
+                                    </div>
+                                </div>
+
+                                <!-- Exercise 9 -->
+                                <div class="bg-white p-4 rounded-lg border shadow-sm">
+                                    <p class="font-bold text-slate-800 text-sm">9. Choose 'at' or 'it's': "______ one o'clock. I'm eating lunch."</p>
+                                    <button onclick="toggleSolution('sol-9')" class="mt-2 bg-montanoTeal text-white text-xs px-3 py-1.5 rounded hover:bg-teal-700 transition font-medium">Show Solution</button>
+                                    <div id="sol-9" class="solution-box bg-slate-50 p-3 mt-2 rounded border text-sm text-slate-700">
+                                        <p class="font-semibold text-montanoBlue">Step-by-step solution:</p>
+                                        <p>At the beginning of a sentence stating the time, we use the contraction <strong>It's</strong>.</p>
+                                    </div>
+                                </div>
+
+                                <!-- Exercise 10 -->
+                                <div class="bg-white p-4 rounded-lg border shadow-sm">
+                                    <p class="font-bold text-slate-800 text-sm">10. Unscramble: [always / brush / I / my teeth / every day]</p>
+                                    <button onclick="toggleSolution('sol-10')" class="mt-2 bg-montanoTeal text-white text-xs px-3 py-1.5 rounded hover:bg-teal-700 transition font-medium">Show Solution</button>
+                                    <div id="sol-10" class="solution-box bg-slate-50 p-3 mt-2 rounded border text-sm text-slate-700">
+                                        <p class="font-semibold text-montanoBlue">Step-by-step solution:</p>
+                                        <p>Subject (I) + Adverb (always) + Verb phrase (brush my teeth) + Time expression (every day) -> <strong>I always brush my teeth every day.</strong></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ADVANCED EXERCISES (11-15) -->
+                        <div class="bg-montanoBlue/10 p-4 rounded-lg border border-montanoBlue">
+                            <span class="bg-montanoBlue text-white text-xs px-2 py-1 rounded font-bold uppercase">Advanced Level Practice</span>
+                            
+                            <div class="mt-4 space-y-4">
+                                <!-- Exercise 11 -->
+                                <div class="bg-white p-4 rounded-lg border shadow-sm">
+                                    <p class="font-bold text-slate-800 text-sm">11. Formulate the question for: "She studies in the evening." using 'What'.</p>
+                                    <button onclick="toggleSolution('sol-11')" class="mt-2 bg-montanoTeal text-white text-xs px-3 py-1.5 rounded hover:bg-teal-700 transition font-medium">Show Solution</button>
+                                    <div id="sol-11" class="solution-box bg-slate-50 p-3 mt-2 rounded border text-sm text-slate-700">
+                                        <p class="font-semibold text-montanoBlue">Step-by-step solution:</p>
+                                        <p>What + auxiliary (does) + subject (she) + verb base (do) + time phrase (in the evening)? -> <strong>What does she do in the evening?</strong></p>
+                                    </div>
+                                </div>
+
+                                <!-- Exercise 12 -->
+                                <div class="bg-white p-4 rounded-lg border shadow-sm">
+                                    <p class="font-bold text-slate-800 text-sm">12. Complete with correct pronouns and auxiliary: "When ______ your sister go to bed?"</p>
+                                    <button onclick="toggleSolution('sol-12')" class="mt-2 bg-montanoTeal text-white text-xs px-3 py-1.5 rounded hover:bg-teal-700 transition font-medium">Show Solution</button>
+                                    <div id="sol-12" class="solution-box bg-slate-50 p-3 mt-2 rounded border text-sm text-slate-700">
+                                        <p class="font-semibold text-montanoBlue">Step-by-step solution:</p>
+                                        <p>"Your sister" is singular third-person (she), so the correct auxiliary is <strong>does</strong>.</p>
+                                    </div>
+                                </div>
+
+                                <!-- Exercise 13 -->
+                                <div class="bg-white p-4 rounded-lg border shadow-sm">
+                                    <p class="font-bold text-slate-800 text-sm">13. Translate routine into a complete sentence: [Subject: I, Frequency: never, Action: play video games, Time: in the morning]</p>
+                                    <button onclick="toggleSolution('sol-13')" class="mt-2 bg-montanoTeal text-white text-xs px-3 py-1.5 rounded hover:bg-teal-700 transition font-medium">Show Solution</button>
+                                    <div id="sol-13" class="solution-box bg-slate-50 p-3 mt-2 rounded border text-sm text-slate-700">
+                                        <p class="font-semibold text-montanoBlue">Step-by-step solution:</p>
+                                        <p>Combine subject, adverb, action, and time: <strong>I never play video games in the morning.</strong></p>
+                                    </div>
+                                </div>
+
+                                <!-- Exercise 14 -->
+                                <div class="bg-white p-4 rounded-lg border shadow-sm">
+                                    <p class="font-bold text-slate-800 text-sm">14. Error correction: Find the mistake in "What time does you get up?" and correct it.</p>
+                                    <button onclick="toggleSolution('sol-14')" class="mt-2 bg-montanoTeal text-white text-xs px-3 py-1.5 rounded hover:bg-teal-700 transition font-medium">Show Solution</button>
+                                    <div id="sol-14" class="solution-box bg-slate-50 p-3 mt-2 rounded border text-sm text-slate-700">
+                                        <p class="font-semibold text-montanoBlue">Step-by-step solution:</p>
+                                        <p>The pronoun "you" pairs with auxiliary "do", not "does". Corrected sentence: <strong>What time do you get up?</strong></p>
+                                    </div>
+                                </div>
+
+                                <!-- Exercise 15 -->
+                                <div class="bg-white p-4 rounded-lg border shadow-sm">
+                                    <p class="font-bold text-slate-800 text-sm">15. Combine time and frequency: Answer "When do you eat breakfast?" given that you always eat it at 7:00.</p>
+                                    <button onclick="toggleSolution('sol-15')" class="mt-2 bg-montanoTeal text-white text-xs px-3 py-1.5 rounded hover:bg-teal-700 transition font-medium">Show Solution</button>
+                                    <div id="sol-15" class="solution-box bg-slate-50 p-3 mt-2 rounded border text-sm text-slate-700">
+                                        <p class="font-semibold text-montanoBlue">Step-by-step solution:</p>
+                                        <p>Incorporate frequency and time: <strong>I always eat breakfast at 7:00.</strong></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 4: CRITICAL REFLECTION -->
+            <section id="reflection" class="tab-content space-y-6">
+                <div class="bg-white p-6 rounded-xl border-2 border-montanoTeal shadow-sm">
+                    <h2 class="text-2xl font-bold text-montanoBlue mb-3">Critical Reflection & Logical Thinking</h2>
+                    <p class="text-slate-700 mb-6">Discuss these open-ended questions with your teacher or classmate to deepen your conceptual understanding.</p>
+                    
+                    <div class="space-y-4">
+                        <div class="bg-montanoLightBlue/10 p-4 rounded-lg border border-montanoLightBlue">
+                            <h3 class="font-bold text-montanoBlue mb-1">Question 1: Why do we use different auxiliary verbs ("do" vs "does") when asking about time?</h3>
+                            <p class="text-slate-600 text-sm">Think about pronoun agreement. Why do we say "When do <em>you</em> get up?" but "When does <em>she</em> get up?" How does English grammar change for third-person singular subjects?</p>
+                        </div>
+                        <div class="bg-montanoOlive/10 p-4 rounded-lg border border-montanoOlive">
+                            <h3 class="font-bold text-montanoTeal mb-1">Question 2: How do adverbs of frequency help us describe our daily lives?</h3>
+                            <p class="text-slate-600 text-sm">Compare your school days with your weekend days. Which activities do you <em>always</em> do, and which do you <em>never</em> do? Why are these words important for scheduling?</p>
+                        </div>
+                        <div class="bg-montanoBlue/10 p-4 rounded-lg border border-montanoBlue">
+                            <h3 class="font-bold text-montanoBlue mb-1">Question 3: Why is precision in telling time crucial in daily school routines?</h3>
+                            <p class="text-slate-600 text-sm">Imagine if everyone arrived at school at random hours instead of specific o'clock times. How do clocks and time expressions keep our classroom organized?</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 5: FORMATIVE QUIZ -->
+            <section id="evaluation" class="tab-content space-y-6">
+                <div class="bg-white p-6 rounded-xl border-2 border-montanoTeal shadow-sm">
+                    <h2 class="text-2xl font-bold text-montanoBlue mb-3">Formative Quiz & Self-Assessment</h2>
+                    <p class="text-slate-700 mb-6">Test your mastery of Telling Time and Adverbs of Frequency. Click each button to reveal the correct answer and explanation.</p>
+
+                    <div class="space-y-4">
+                        <!-- Quiz Q1 -->
+                        <div class="bg-slate-50 p-4 rounded-lg border shadow-sm">
+                            <p class="font-bold text-slate-800 text-sm">1. Choose the correct response to "What time is it?" when the clock shows 11:00.</p>
+                            <div class="mt-2 text-xs text-slate-600 space-y-1">
+                                <p>A) At eleven o'clock.</p>
+                                <p>B) It's eleven o'clock.</p>
+                                <p>C) She gets up at eleven.</p>
+                            </div>
+                            <button onclick="toggleSolution('quiz-1')" class="mt-3 bg-montanoBlue text-white text-xs px-3 py-1.5 rounded hover:bg-blue-700 transition font-medium">Show Answer</button>
+                            <div id="quiz-1" class="solution-box bg-white p-3 mt-2 rounded border text-sm text-slate-700">
+                                <p class="font-semibold text-montanoBlue">Correct Answer: B) It's eleven o'clock.</p>
+                                <p class="text-xs text-slate-600 mt-1">Explanation: "What time is it?" directly asks for the current time using "It's".</p>
+                            </div>
+                        </div>
+
+                        <!-- Quiz Q2 -->
+                        <div class="bg-slate-50 p-4 rounded-lg border shadow-sm">
+                            <p class="font-bold text-slate-800 text-sm">2. Which sentence correctly uses an adverb of frequency for a 100% habit?</p>
+                            <div class="mt-2 text-xs text-slate-600 space-y-1">
+                                <p>A) I never brush my teeth.</p>
+                                <p>B) I always brush my teeth.</p>
+                                <p>C) I at brush my teeth.</p>
+                            </div>
+                            <button onclick="toggleSolution('quiz-2')" class="mt-3 bg-montanoBlue text-white text-xs px-3 py-1.5 rounded hover:bg-blue-700 transition font-medium">Show Answer</button>
+                            <div id="quiz-2" class="solution-box bg-white p-3 mt-2 rounded border text-sm text-slate-700">
+                                <p class="font-semibold text-montanoBlue">Correct Answer: B) I always brush my teeth.</p>
+                                <p class="text-xs text-slate-600 mt-1">Explanation: "Always" represents 100% frequency (habitual daily routine).</p>
+                            </div>
+                        </div>
+
+                        <!-- Quiz Q3 -->
+                        <div class="bg-slate-50 p-4 rounded-lg border shadow-sm">
+                            <p class="font-bold text-slate-800 text-sm">3. Complete the third-person question: "When ______ your sister eat breakfast?"</p>
+                            <div class="mt-2 text-xs text-slate-600 space-y-1">
+                                <p>A) do</p>
+                                <p>B) does</p>
+                                <p>C) is</p>
+                            </div>
+                            <button onclick="toggleSolution('quiz-3')" class="mt-3 bg-montanoBlue text-white text-xs px-3 py-1.5 rounded hover:bg-blue-700 transition font-medium">Show Answer</button>
+                            <div id="quiz-3" class="solution-box bg-white p-3 mt-2 rounded border text-sm text-slate-700">
+                                <p class="font-semibold text-montanoBlue">Correct Answer: B) does</p>
+                                <p class="text-xs text-slate-600 mt-1">Explanation: "Your sister" is third-person singular, requiring the auxiliary "does".</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-montanoTeal text-white p-3 text-center text-xs font-semibold border-t-2 border-montanoYellow">
+            Colegio Montano &copy; 2026 | Interactive Digital Chalkboard for Canvas Education
+        </footer>
+
+    </div>
+
+    <!-- JavaScript for Interactivity -->
+    <script>
+        // Tab switching logic
+        function switchTab(tabId) {
+            // Hide all tab contents
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+
+            // Remove active style from all buttons
+            const buttons = document.querySelectorAll('nav button');
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-montanoBlue', 'text-montanoYellow', 'border', 'border-montanoYellow');
+                btn.classList.add('bg-montanoTeal');
+            });
+
+            // Show selected tab content
+            document.getElementById(tabId).classList.add('active');
+
+            // Highlight active button
+            const activeBtn = document.getElementById('btn-' + tabId);
+            activeBtn.classList.remove('bg-montanoTeal');
+            activeBtn.classList.add('bg-montanoBlue', 'text-montanoYellow', 'border', 'border-montanoYellow');
+        }
+
+        // Toggle solution visibility
+        function toggleSolution(id) {
+            const box = document.getElementById(id);
+            box.classList.toggle('show');
+        }
+
+        // Fullscreen API toggle function
+        function toggleFullScreen() {
+            const elem = document.getElementById('chalkboard');
+            if (!document.fullscreenElement) {
+                if (elem.requestFullscreen) {
+                    elem.requestFullscreen();
+                } else if (elem.webkitRequestFullscreen) { /* Safari */
+                    elem.webkitRequestFullscreen();
+                } else if (elem.msRequestFullscreen) { /* IE11 */
+                    elem.msRequestFullscreen();
+                }
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.webkitExitFullscreen) { /* Safari */
+                    document.webkitExitFullscreen();
+                } else if (document.msExitFullscreen) { /* IE11 */
+                    document.msExitFullscreen();
+                }
+            }
+        }
+    </script>
+
+</body>
+</html>
